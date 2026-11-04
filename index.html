@@ -112,7 +112,7 @@
 
     <!-- 1 Noche -->
     <section class="step" data-step="1">
-      <div class="eyebrow">Pregunta 1 de 7</div>
+      <div class="eyebrow">Pregunta 1 de 6</div>
       <h1>¿Cómo calificarías la <span class="accent">noche</span> en general?</h1>
       <p class="sub">Tocá una estrella.</p>
       <div class="stars" data-campo="noche"></div>
@@ -121,7 +121,7 @@
 
     <!-- 2 Disfrutaste -->
     <section class="step" data-step="2">
-      <div class="eyebrow">Pregunta 2 de 7</div>
+      <div class="eyebrow">Pregunta 2 de 6</div>
       <h1>¿Qué fue lo que más <span class="accent">disfrutaste</span>?</h1>
       <p class="sub">Podés marcar varias.</p>
       <div class="opts cols multi" data-campo="disfrute" data-otro="otroDisfrute">
@@ -139,7 +139,7 @@
 
     <!-- 3 Comida -->
     <section class="step" data-step="3">
-      <div class="eyebrow">Pregunta 3 de 7</div>
+      <div class="eyebrow">Pregunta 3 de 6</div>
       <h1>¿Cómo estuvo la <span class="accent">comida</span>?</h1>
       <p class="sub">Los sabores, las porciones, la presentación.</p>
       <div class="opts single" data-campo="comida">
@@ -152,22 +152,10 @@
       <button class="back" onclick="volver()">← Volver</button>
     </section>
 
-    <!-- 4 Precio -->
-    <section class="step" data-step="4">
-      <div class="eyebrow">Pregunta 4 de 7</div>
-      <h1>¿Qué te pareció la relación <span class="accent">precio–experiencia</span>?</h1>
-      <p class="sub">Sé sincero, nos ayuda a ajustar.</p>
-      <div class="opts single" data-campo="precio">
-        <button class="opt">Muy buena</button>
-        <button class="opt">Justa</button>
-        <button class="opt">Cara para lo que fue</button>
-      </div>
-      <button class="back" onclick="volver()">← Volver</button>
-    </section>
 
-    <!-- 5 Volver -->
-    <section class="step" data-step="5">
-      <div class="eyebrow">Pregunta 5 de 7</div>
+    <!-- 4 Volver -->
+    <section class="step" data-step="4">
+      <div class="eyebrow">Pregunta 4 de 6</div>
       <h1>¿Te gustaría recibir la invitación a la <span class="accent">próxima cena</span>?</h1>
       <p class="sub">Cada edición viajamos a un destino distinto.</p>
       <div class="opts single" data-campo="invitacion">
@@ -178,9 +166,9 @@
       <button class="back" onclick="volver()">← Volver</button>
     </section>
 
-    <!-- 6 Destino -->
-    <section class="step" data-step="6">
-      <div class="eyebrow">Pregunta 6 de 7</div>
+    <!-- 5 Destino -->
+    <section class="step" data-step="5">
+      <div class="eyebrow">Pregunta 5 de 6</div>
       <h1>¿A dónde <span class="accent">viajamos</span> la próxima?</h1>
       <p class="sub">Elegí los destinos que te tienten. Podés marcar varios.</p>
       <div class="opts cols multi" data-campo="destino" data-otro="otroDestino">
@@ -200,9 +188,9 @@
       <button class="back" onclick="volver()">← Volver</button>
     </section>
 
-    <!-- 7 Mejorar -->
-    <section class="step" data-step="7">
-      <div class="eyebrow">Pregunta 7 de 7</div>
+    <!-- 6 Mejorar -->
+    <section class="step" data-step="6">
+      <div class="eyebrow">Pregunta 6 de 6</div>
       <h1>¿Hay algo que <span class="accent">mejorarías</span>?</h1>
       <p class="sub">Cualquier detalle suma (opcional).</p>
       <textarea class="field" id="mejora" placeholder="Ej: más tiempo entre platos, otra música, el horario..."></textarea>
@@ -213,8 +201,8 @@
       <button class="back" onclick="volver()">← Volver</button>
     </section>
 
-    <!-- 8 Gracias -->
-    <section class="step" data-step="8">
+    <!-- 7 Gracias -->
+    <section class="step" data-step="7">
       <div class="checkwrap"><svg viewBox="0 0 100 100"><circle class="ring" cx="50" cy="50" r="45"/><path class="tick" d="M30 52 L45 66 L72 36"/></svg></div>
       <h1 id="graciasTitle">¡Gracias!</h1>
       <p class="sub" id="graciasSub">Tus respuestas quedaron registradas. ¡Nos vemos en el próximo viaje sin valija!</p>
@@ -227,7 +215,7 @@
 /* 1) Pegá acá la URL de tu Apps Script (termina en /exec) */
 var SHEETS_URL = "https://script.google.com/macros/s/AKfycbw5c_DCnp7Qy77udP4PR8u425tiCxnxeoQ4xvfbVTAH_i4bwA9apNv7-xDZTxmfULuJZQ/exec";
 
-var respuestas = { noche:'', disfrute:[], comida:'', precio:'', invitacion:'', destino:[] };
+var respuestas = { noche:'', disfrute:[], comida:'', invitacion:'', destino:[] };
 var pasoActual = 0;
 
 // papel picado
@@ -240,7 +228,7 @@ var pasoActual = 0;
 // barra de progreso
 (function(){
   var pr=document.getElementById('progress');
-  for(var i=0;i<7;i++){ pr.appendChild(document.createElement('span')); }
+  for(var i=0;i<6;i++){ pr.appendChild(document.createElement('span')); }
 })();
 
 // estrellas
@@ -319,12 +307,12 @@ function enviar(){
     noche:respuestas.noche,
     disfrute:conOtro(respuestas.disfrute,'otroDisfrute'),
     comida:respuestas.comida,
-    precio:respuestas.precio,
+    precio:'',
     invitacion:respuestas.invitacion,
     destino:conOtro(respuestas.destino,'otroDestino'),
     mejora:document.getElementById('mejora').value.trim()
   };
-  pasoActual=8; mostrarPaso(8);
+  pasoActual=7; mostrarPaso(7);
   document.querySelectorAll('#progress span').forEach(function(s){ s.classList.add('done'); });
   if(respuestas.noche>=4){
     document.getElementById('graciasTitle').innerHTML='¡Gracias, nos hacés muy felices!';
